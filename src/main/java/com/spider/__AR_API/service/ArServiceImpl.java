@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.spider.ADMIN_API.entities.UserEntity;
-import com.spider.ADMIN_API.repositires.UserRepo;
 import com.spider.__AR_API.bindings.App;
 import com.spider.__AR_API.constants.AppConstatnts;
 import com.spider.__AR_API.entites.AppEntity;
+import com.spider.__AR_API.entites.UserEntity;
 import com.spider.__AR_API.exception.SsaWebException;
 import com.spider.__AR_API.repositires.AppRepo;
+import com.spider.__AR_API.repositires.UserRepo;
 
+@Service
 public class ArServiceImpl implements ArService {
 
 	@Autowired
@@ -36,6 +38,7 @@ public class ArServiceImpl implements ArService {
 			                          .retrieve()
 			                          .bodyToMono(String.class)
 			                          .block();
+			
 			if (AppConstatnts.RI.equals(stateName)) {
 				
 				UserEntity userEntity = userRepo.findById(app.getUserId()).get();
